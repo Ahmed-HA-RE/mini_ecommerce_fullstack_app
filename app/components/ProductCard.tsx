@@ -26,6 +26,7 @@ const ProductCard = ({ product }: { product: Stripe.Product }) => {
             width={0}
             height={0}
             sizes='100vw'
+            loading='eager'
             className='aspect-video h-62 w-full rounded-t-xl object-cover'
           />
         </Link>

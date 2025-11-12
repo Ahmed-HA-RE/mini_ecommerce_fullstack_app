@@ -13,7 +13,7 @@ const Hero = ({ products }: HeroProps) => {
       <div className='max-w-7xl mx-auto'>
         <div className='flex flex-col md:flex-row gap-y-4'>
           {/* left side */}
-          <div className='flex flex-col items-center md:items-start justify-center gap-4 p-4 flex-1/3'>
+          <div className='flex flex-col items-center md:items-start justify-center gap-4 px-4 flex-1/3'>
             <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold'>
               Welcome to MiniMart
             </h2>
