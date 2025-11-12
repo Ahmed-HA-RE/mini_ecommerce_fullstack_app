@@ -1,5 +1,6 @@
 import { stripe } from './lib/stripe';
 import Hero from './components/Hero';
+import CarouselProducts from './components/Carousel';
 
 const HomePage = async () => {
   const products = await stripe.products.list({
@@ -10,6 +11,7 @@ const HomePage = async () => {
   return (
     <>
       <Hero products={products} />
+      <CarouselProducts products={products.data} />
     </>
   );
 };

@@ -25,7 +25,7 @@ const Hero = ({ products }: HeroProps) => {
             </Button>
           </div>
           {/* right side */}
-          <div className='flex-1/4'>
+          <div className='flex-1/4 hidden md:block'>
             <Image
               src={products.data[2].images[0]}
               alt={products.data[0].name}
