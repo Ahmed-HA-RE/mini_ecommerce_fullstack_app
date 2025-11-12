@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { ShoppingCartIcon } from 'lucide-react';
 import { Badge } from './ui/badge';
+import useCartStore from 'store/cart';
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -24,6 +25,8 @@ const navigationLinks = [
 const Navbar = () => {
   const isActive = usePathname();
   const [openPopOver, setOpenPopOver] = useState(false);
+  const cart = useCartStore((state) => state.cart);
+  const totalItems = cart.reduce((a, c) => a + c.qty, 0);
 
   return (
     <nav className='border-b border-b-gray-200 px-4 md:px-6'>
@@ -126,15 +129,17 @@ const Navbar = () => {
           </div>
           {/* Right side */}
           <div className='relative w-fit'>
-            <Link href='/cart'>
+            <Link href='/checkout'>
               <Avatar className='size-9 rounded-sm'>
                 <AvatarFallback className='rounded-sm bg-0'>
                   <ShoppingCartIcon className='size-6' />
                 </AvatarFallback>
               </Avatar>
-              <Badge className='absolute -top-1 right-0 h-5 min-w-5 rounded-full px-1 tabular-nums'>
-                8
-              </Badge>
+              {totalItems > 0 && (
+                <Badge className='absolute -top-1 right-0 h-5 min-w-5 rounded-full px-1 tabular-nums bg-red-500'>
+                  {totalItems}
+                </Badge>
+              )}
             </Link>
           </div>
         </div>
