@@ -26,7 +26,7 @@ const Navbar = () => {
   const [openPopOver, setOpenPopOver] = useState(false);
 
   return (
-    <nav className='border-b px-4 md:px-6'>
+    <nav className='border-b border-b-gray-200 px-4 md:px-6'>
       <div className='max-w-7xl mx-auto'>
         <div className='flex h-16 items-center justify-between'>
           {/* Mobile menu trigger */}
