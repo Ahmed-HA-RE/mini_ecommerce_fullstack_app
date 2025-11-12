@@ -13,12 +13,32 @@ import Image from 'next/image';
 import { formatAmount } from '@/utils/formatAmount';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
+import creatCheckoutSession from '@/actions/createCheckoutSession';
+import { useRouter } from 'next/navigation';
+import { Spinner } from './ui/spinner';
+import { useState } from 'react';
 
 const OrderSummary = () => {
   const cart = useCartStore((state) => state.cart);
   const totalItemsPrice = cart.reduce((a, c) => a + c.price * c.qty, 0);
   const addToCart = useCartStore((state) => state.addToCart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
+
+  const handlCheckout = async () => {
+    try {
+      setIsPending(true);
+      const result = await creatCheckoutSession(cart);
+      if (result.redirect) {
+        router.push(result.redirect);
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   return (
     <>
@@ -97,6 +117,14 @@ const OrderSummary = () => {
           </CardFooter>
         </Card>
       )}
+      <Button
+        size={'lg'}
+        className='mt-5 w-full max-w-lg text-base cursor-pointer h-11'
+        onClick={handlCheckout}
+        disabled={isPending}
+      >
+        {isPending ? <Spinner className='size-8' /> : 'Proceed To Checkout'}
+      </Button>
     </>
   );
 };
