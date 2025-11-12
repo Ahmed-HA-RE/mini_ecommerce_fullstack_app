@@ -53,7 +53,7 @@ const OrderSummary = () => {
             <CardTitle className='text-2xl'>Order Summary</CardTitle>
           </CardHeader>
           <CardContent className='space-y-6 px-4'>
-            {cart.map((cartItem, index) => (
+            {cart.map((cartItem) => (
               <div key={cartItem.id}>
                 <div className='flex flex-row items-center  gap-4'>
                   {/* image */}
@@ -117,14 +117,16 @@ const OrderSummary = () => {
           </CardFooter>
         </Card>
       )}
-      <Button
-        size={'lg'}
-        className='mt-5 w-full max-w-lg text-base cursor-pointer h-11'
-        onClick={handlCheckout}
-        disabled={isPending}
-      >
-        {isPending ? <Spinner className='size-8' /> : 'Proceed To Checkout'}
-      </Button>
+      {cart.length > 0 && (
+        <Button
+          size={'lg'}
+          className='mt-5 w-full max-w-lg text-base cursor-pointer h-11'
+          onClick={handlCheckout}
+          disabled={isPending}
+        >
+          {isPending ? <Spinner className='size-8' /> : 'Proceed To Checkout'}
+        </Button>
+      )}
     </>
   );
 };
